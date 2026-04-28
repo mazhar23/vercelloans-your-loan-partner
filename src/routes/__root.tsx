@@ -1,8 +1,6 @@
-import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
+import { Outlet, Link, createRootRoute } from "@tanstack/react-router";
 import { SiteHeader } from "../components/SiteHeader";
 import { SiteFooter } from "../components/SiteFooter";
-
-import appCss from "../styles.css?url";
 
 function NotFoundComponent() {
   return (
@@ -27,47 +25,10 @@ function NotFoundComponent() {
 }
 
 export const Route = createRootRoute({
-  head: () => ({
-    meta: [
-      { charSet: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "VercelLoans — Fast Personal Loans for U.S. Residents" },
-      { name: "description", content: "Apply online for fast, transparent personal loans up to $35,000. Quick decisions, fixed rates, funds delivered to your bank." },
-      { name: "author", content: "VercelLoans" },
-      { property: "og:title", content: "VercelLoans — Fast Personal Loans" },
-      { property: "og:description", content: "Apply online in minutes. Quick decisions, fixed rates." },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-    ],
-    links: [
-      {
-        rel: "stylesheet",
-        href: appCss,
-      },
-      {
-        rel: "icon",
-        href: "data:,",
-      },
-    ],
-  }),
-  shellComponent: RootShell,
   component: RootComponent,
   notFoundComponent: NotFoundComponent,
 });
 
-function RootShell({ children }: { children: React.ReactNode }) {
-  return (
-    <html lang="en">
-      <head>
-        <HeadContent />
-      </head>
-      <body>
-        {children}
-        <Scripts />
-      </body>
-    </html>
-  );
-}
 
 function RootComponent() {
   return (
