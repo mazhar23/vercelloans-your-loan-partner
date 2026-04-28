@@ -1,4 +1,18 @@
-// Additional vite config can be passed via defineConfig({ vite: { ... } }) if needed.
-import { defineConfig } from "@lovable.dev/vite-tanstack-config";
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import tsConfigPaths from "vite-tsconfig-paths";
+import tailwindcss from "@tailwindcss/vite";
+import { tanstackStart } from "@tanstack/react-start/plugin/vite";
 
-export default defineConfig();
+export default defineConfig({
+  plugins: [
+    tailwindcss(),
+    tsConfigPaths(),
+    tanstackStart({
+      server: {
+        preset: "vercel",
+      },
+    }),
+    react(),
+  ],
+});
