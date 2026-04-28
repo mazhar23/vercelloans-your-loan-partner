@@ -3,6 +3,7 @@ import { useState } from "react";
 import { z } from "zod";
 import { CheckCircle2, ShieldCheck, Lock } from "lucide-react";
 import { toast } from "sonner";
+import emailjs from "@emailjs/browser";
 import { Toaster } from "../components/ui/sonner";
 
 export const Route = createFileRoute("/apply")({
@@ -74,7 +75,7 @@ function ApplyPage() {
   const next = () => { if (validateStep()) setStep((s) => Math.min(s + 1, steps.length - 1)); };
   const back = () => setStep((s) => Math.max(s - 1, 0));
 
-  const submit = () => {
+  const submit = async () => {
     const result = schema.safeParse(data);
     if (!result.success) {
       const errs: Record<string, string> = {};
@@ -83,9 +84,37 @@ function ApplyPage() {
       toast.error("Please fix the highlighted fields.");
       return;
     }
-    setSubmitted(true);
-    toast.success("Application received!");
+
+    const toastId = toast.loading("Submitting your application…");
+    try {
+      await emailjs.send(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        {
+          full_name:         data.fullName,
+          email:             data.email,
+          phone:             data.phone,
+          address:           data.address,
+          city:              data.city,
+          state:             data.state,
+          zip:               data.zip,
+          loan_amount:       `$${Number(data.loanAmount).toLocaleString()}`,
+          loan_purpose:      data.loanPurpose,
+          employment_status: data.employmentStatus,
+          annual_income:     `$${Number(data.annualIncome || 0).toLocaleString()}`,
+        },
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
+      );
+      toast.dismiss(toastId);
+      toast.success("Application received!");
+      setSubmitted(true);
+    } catch (err) {
+      console.error("EmailJS error:", err);
+      toast.dismiss(toastId);
+      toast.error("Submission failed — please try again or call us directly.");
+    }
   };
+
 
   if (submitted) {
     return (
