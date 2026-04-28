@@ -37,9 +37,8 @@ export function SiteFooter() {
         <div>
           <h4 className="font-semibold mb-3 text-sm">Get in Touch</h4>
           <ul className="space-y-2 text-sm text-muted-foreground">
-            <li className="flex items-center gap-2"><Mail className="h-4 w-4" /> support@vercelloans.com</li>
-            <li className="flex items-center gap-2"><Phone className="h-4 w-4" /> 1-800-555-0142</li>
-            <li className="flex items-center gap-2"><MapPin className="h-4 w-4" /> Wilmington, DE, USA</li>
+            <li className="flex items-center gap-2"><Phone className="h-4 w-4" /> 1-312-373-0471</li>
+            <li className="flex items-center gap-2"><MapPin className="h-4 w-4" /> Downtown Chicago, Illinois., USA</li>
           </ul>
         </div>
       </div>
