@@ -9,9 +9,15 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as RatesRouteImport } from './routes/rates'
 import { Route as LoansRouteImport } from './routes/loans'
 import { Route as IndexRouteImport } from './routes/index'
 
+const RatesRoute = RatesRouteImport.update({
+  id: '/rates',
+  path: '/rates',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LoansRoute = LoansRouteImport.update({
   id: '/loans',
   path: '/loans',
@@ -26,31 +32,42 @@ const IndexRoute = IndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/loans': typeof LoansRoute
+  '/rates': typeof RatesRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/loans': typeof LoansRoute
+  '/rates': typeof RatesRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/loans': typeof LoansRoute
+  '/rates': typeof RatesRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/loans'
+  fullPaths: '/' | '/loans' | '/rates'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/loans'
-  id: '__root__' | '/' | '/loans'
+  to: '/' | '/loans' | '/rates'
+  id: '__root__' | '/' | '/loans' | '/rates'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   LoansRoute: typeof LoansRoute
+  RatesRoute: typeof RatesRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/rates': {
+      id: '/rates'
+      path: '/rates'
+      fullPath: '/rates'
+      preLoaderRoute: typeof RatesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/loans': {
       id: '/loans'
       path: '/loans'
@@ -71,6 +88,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   LoansRoute: LoansRoute,
+  RatesRoute: RatesRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
