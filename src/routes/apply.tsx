@@ -6,13 +6,13 @@ import { toast } from "sonner";
 import emailjs from "@emailjs/browser";
 import { Toaster } from "../components/ui/sonner";
 
-// EmailJS configuration
+// EmailJS configuration (v4 API)
 const EJS_SERVICE  = "service_1zvjatx";
 const EJS_TEMPLATE = "template_a4s8uhb";
 const EJS_KEY      = "ZGCBdQn6Uwqmx-pYO";
 
-// Initialize EmailJS once at module load
-emailjs.init(EJS_KEY);
+// Initialize EmailJS with v4 API
+emailjs.init({ publicKey: EJS_KEY });
 
 export const Route = createFileRoute("/apply")({
   head: () => ({
@@ -111,7 +111,6 @@ function ApplyPage() {
           employment_status: data.employmentStatus,
           annual_income:     `$${Number(data.annualIncome || 0).toLocaleString()}`,
         },
-        EJS_KEY,
       );
       toast.dismiss(toastId);
       toast.success("Application received!");
