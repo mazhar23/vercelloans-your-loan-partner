@@ -22,7 +22,10 @@ function ContactPage() {
           { icon: MapPin, t: "Headquarters", v: "Downtown Chicago, Illinois., USA" },
         ].map(({ icon: Icon, t, v }) => (
           <div key={t} className="rounded-2xl border border-border bg-card p-6 text-center">
-            <div className="mx-auto grid h-11 w-11 place-items-center rounded-xl" style={{ background: "var(--gradient-hero)" }}>
+            <div
+              className="mx-auto grid h-11 w-11 place-items-center rounded-xl"
+              style={{ background: "var(--gradient-hero)" }}
+            >
               <Icon className="h-5 w-5 text-primary-foreground" />
             </div>
             <h3 className="mt-4 font-semibold">{t}</h3>

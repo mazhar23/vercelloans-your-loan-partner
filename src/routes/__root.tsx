@@ -29,7 +29,6 @@ export const Route = createRootRoute({
   notFoundComponent: NotFoundComponent,
 });
 
-
 function RootComponent() {
   return (
     <div className="flex min-h-screen flex-col">

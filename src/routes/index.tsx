@@ -1,14 +1,29 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, ShieldCheck, Zap, BadgeDollarSign, Clock, Star, CheckCircle2 } from "lucide-react";
+import {
+  ArrowRight,
+  ShieldCheck,
+  Zap,
+  BadgeDollarSign,
+  Clock,
+  Star,
+  CheckCircle2,
+} from "lucide-react";
 import heroImg from "../assets/hero.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "VercelLoans — Fast Personal Loans up to $35,000" },
-      { name: "description", content: "Get a personal loan in minutes. Fixed rates from 5.99% APR. Funds in your bank as soon as the next business day." },
+      {
+        name: "description",
+        content:
+          "Get a personal loan in minutes. Fixed rates from 5.99% APR. Funds in your bank as soon as the next business day.",
+      },
       { property: "og:title", content: "VercelLoans — Fast Personal Loans" },
-      { property: "og:description", content: "Apply online in minutes. Funds as soon as next business day." },
+      {
+        property: "og:description",
+        content: "Apply online in minutes. Funds as soon as next business day.",
+      },
     ],
   }),
   component: Home,
@@ -29,10 +44,20 @@ function Home() {
               <span className="h-2 w-2 rounded-full bg-accent" /> Trusted by 250,000+ Americans
             </span>
             <h1 className="mt-5 text-4xl md:text-6xl font-bold tracking-tight leading-[1.05]">
-              Personal loans, <span style={{ background: "var(--gradient-hero)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>delivered fast.</span>
+              Personal loans,{" "}
+              <span
+                style={{
+                  background: "var(--gradient-hero)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                }}
+              >
+                delivered fast.
+              </span>
             </h1>
             <p className="mt-5 text-lg text-muted-foreground max-w-xl">
-              Borrow $1,000 to $35,000 with fixed rates from 5.99% APR. Check your rate in 60 seconds — it won't affect your credit score.
+              Borrow $1,000 to $35,000 with fixed rates from 5.99% APR. Check your rate in 60
+              seconds — it won't affect your credit score.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
@@ -50,13 +75,22 @@ function Home() {
               </Link>
             </div>
             <div className="mt-8 flex flex-wrap gap-6 text-sm text-muted-foreground">
-              <span className="inline-flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-accent" /> No hidden fees</span>
-              <span className="inline-flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-accent" /> Soft credit check</span>
-              <span className="inline-flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-accent" /> Funds in 1 business day</span>
+              <span className="inline-flex items-center gap-2">
+                <CheckCircle2 className="h-4 w-4 text-accent" /> No hidden fees
+              </span>
+              <span className="inline-flex items-center gap-2">
+                <CheckCircle2 className="h-4 w-4 text-accent" /> Soft credit check
+              </span>
+              <span className="inline-flex items-center gap-2">
+                <CheckCircle2 className="h-4 w-4 text-accent" /> Funds in 1 business day
+              </span>
             </div>
           </div>
           <div className="relative">
-            <div className="absolute -inset-6 -z-10 rounded-3xl" style={{ background: "var(--gradient-hero)", filter: "blur(60px)", opacity: 0.35 }} />
+            <div
+              className="absolute -inset-6 -z-10 rounded-3xl"
+              style={{ background: "var(--gradient-hero)", filter: "blur(60px)", opacity: 0.35 }}
+            />
             <img
               src={heroImg}
               alt="VercelLoans premium financial services"
@@ -88,20 +122,54 @@ function Home() {
       {/* FEATURES */}
       <section className="container mx-auto px-4 py-20">
         <div className="text-center max-w-2xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight">Why borrowers choose VercelLoans</h2>
-          <p className="mt-4 text-muted-foreground">A modern lending experience built for transparency, speed, and trust.</p>
+          <h2 className="text-3xl md:text-4xl font-bold tracking-tight">
+            Why borrowers choose VercelLoans
+          </h2>
+          <p className="mt-4 text-muted-foreground">
+            A modern lending experience built for transparency, speed, and trust.
+          </p>
         </div>
         <div className="mt-12 grid md:grid-cols-3 gap-6">
           {[
-            { icon: Zap, title: "60-second decisions", desc: "Get pre-qualified instantly with a soft credit pull." },
-            { icon: ShieldCheck, title: "Bank-grade security", desc: "256-bit encryption. We never share your data." },
-            { icon: BadgeDollarSign, title: "Fixed rates", desc: "Predictable monthly payments from 5.99% APR." },
-            { icon: Clock, title: "Funded fast", desc: "Money in your bank as soon as the next business day." },
-            { icon: CheckCircle2, title: "No prepayment fees", desc: "Pay off your loan early without penalties." },
-            { icon: Star, title: "Top-rated support", desc: "Real humans, 7 days a week. Average wait under 2 minutes." },
+            {
+              icon: Zap,
+              title: "60-second decisions",
+              desc: "Get pre-qualified instantly with a soft credit pull.",
+            },
+            {
+              icon: ShieldCheck,
+              title: "Bank-grade security",
+              desc: "256-bit encryption. We never share your data.",
+            },
+            {
+              icon: BadgeDollarSign,
+              title: "Fixed rates",
+              desc: "Predictable monthly payments from 5.99% APR.",
+            },
+            {
+              icon: Clock,
+              title: "Funded fast",
+              desc: "Money in your bank as soon as the next business day.",
+            },
+            {
+              icon: CheckCircle2,
+              title: "No prepayment fees",
+              desc: "Pay off your loan early without penalties.",
+            },
+            {
+              icon: Star,
+              title: "Top-rated support",
+              desc: "Real humans, 7 days a week. Average wait under 2 minutes.",
+            },
           ].map(({ icon: Icon, title, desc }) => (
-            <div key={title} className="rounded-2xl border border-border bg-card p-6 hover:shadow-lg transition">
-              <div className="grid h-11 w-11 place-items-center rounded-xl" style={{ background: "var(--gradient-hero)" }}>
+            <div
+              key={title}
+              className="rounded-2xl border border-border bg-card p-6 hover:shadow-lg transition"
+            >
+              <div
+                className="grid h-11 w-11 place-items-center rounded-xl"
+                style={{ background: "var(--gradient-hero)" }}
+              >
                 <Icon className="h-5 w-5 text-primary-foreground" />
               </div>
               <h3 className="mt-4 font-semibold text-lg">{title}</h3>
@@ -116,23 +184,50 @@ function Home() {
         <div className="container mx-auto px-4 py-20">
           <div className="text-center max-w-2xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-bold tracking-tight">Three simple steps</h2>
-            <p className="mt-4 text-muted-foreground">From application to funding in as little as 24 hours.</p>
+            <p className="mt-4 text-muted-foreground">
+              From application to funding in as little as 24 hours.
+            </p>
           </div>
           <div className="mt-12 grid md:grid-cols-3 gap-6">
             {[
-              { n: "01", t: "Check your rate", d: "Tell us a bit about yourself. Soft pull only — no impact to your credit." },
-              { n: "02", t: "Pick your offer", d: "Choose from personalized loan offers with clear terms." },
-              { n: "03", t: "Get funded", d: "Sign electronically and receive funds as soon as the next business day." },
+              {
+                n: "01",
+                t: "Check your rate",
+                d: "Tell us a bit about yourself. Soft pull only — no impact to your credit.",
+              },
+              {
+                n: "02",
+                t: "Pick your offer",
+                d: "Choose from personalized loan offers with clear terms.",
+              },
+              {
+                n: "03",
+                t: "Get funded",
+                d: "Sign electronically and receive funds as soon as the next business day.",
+              },
             ].map((s) => (
               <div key={s.n} className="rounded-2xl bg-card border border-border p-8">
-                <div className="text-5xl font-bold" style={{ background: "var(--gradient-hero)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>{s.n}</div>
+                <div
+                  className="text-5xl font-bold"
+                  style={{
+                    background: "var(--gradient-hero)",
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                  }}
+                >
+                  {s.n}
+                </div>
                 <h3 className="mt-4 font-semibold text-xl">{s.t}</h3>
                 <p className="mt-2 text-muted-foreground text-sm">{s.d}</p>
               </div>
             ))}
           </div>
           <div className="text-center mt-10">
-            <Link to="/apply" className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-primary-foreground" style={{ background: "var(--gradient-hero)" }}>
+            <Link
+              to="/apply"
+              className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-primary-foreground"
+              style={{ background: "var(--gradient-hero)" }}
+            >
               Get started <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
@@ -142,17 +237,33 @@ function Home() {
       {/* TESTIMONIALS */}
       <section className="container mx-auto px-4 py-20">
         <div className="text-center max-w-2xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight">Loved by borrowers nationwide</h2>
+          <h2 className="text-3xl md:text-4xl font-bold tracking-tight">
+            Loved by borrowers nationwide
+          </h2>
         </div>
         <div className="mt-12 grid md:grid-cols-3 gap-6">
           {[
-            { n: "Sarah M.", l: "Austin, TX", q: "Process was unbelievably smooth. I had funds in my account the next morning." },
-            { n: "James R.", l: "Columbus, OH", q: "Used my loan to consolidate credit card debt. Saved hundreds in interest already." },
-            { n: "Priya K.", l: "Seattle, WA", q: "Transparent rates, no surprises. Customer support actually picked up the phone!" },
+            {
+              n: "Sarah M.",
+              l: "Austin, TX",
+              q: "Process was unbelievably smooth. I had funds in my account the next morning.",
+            },
+            {
+              n: "James R.",
+              l: "Columbus, OH",
+              q: "Used my loan to consolidate credit card debt. Saved hundreds in interest already.",
+            },
+            {
+              n: "Priya K.",
+              l: "Seattle, WA",
+              q: "Transparent rates, no surprises. Customer support actually picked up the phone!",
+            },
           ].map((t) => (
             <div key={t.n} className="rounded-2xl border border-border bg-card p-6">
               <div className="flex gap-1 text-accent">
-                {Array.from({ length: 5 }).map((_, i) => <Star key={i} className="h-4 w-4 fill-current" />)}
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <Star key={i} className="h-4 w-4 fill-current" />
+                ))}
               </div>
               <p className="mt-4 text-sm">"{t.q}"</p>
               <div className="mt-4 text-sm font-semibold">{t.n}</div>
@@ -164,10 +275,18 @@ function Home() {
 
       {/* CTA */}
       <section className="container mx-auto px-4 pb-20">
-        <div className="rounded-3xl p-10 md:p-16 text-center text-primary-foreground" style={{ background: "var(--gradient-hero)", boxShadow: "var(--shadow-elegant)" }}>
+        <div
+          className="rounded-3xl p-10 md:p-16 text-center text-primary-foreground"
+          style={{ background: "var(--gradient-hero)", boxShadow: "var(--shadow-elegant)" }}
+        >
           <h2 className="text-3xl md:text-4xl font-bold">Ready to see your rate?</h2>
-          <p className="mt-3 opacity-90 max-w-xl mx-auto">Checking takes 60 seconds and won't affect your credit score.</p>
-          <Link to="/apply" className="mt-7 inline-flex items-center gap-2 rounded-full bg-background px-6 py-3 text-sm font-semibold text-foreground hover:opacity-90">
+          <p className="mt-3 opacity-90 max-w-xl mx-auto">
+            Checking takes 60 seconds and won't affect your credit score.
+          </p>
+          <Link
+            to="/apply"
+            className="mt-7 inline-flex items-center gap-2 rounded-full bg-background px-6 py-3 text-sm font-semibold text-foreground hover:opacity-90"
+          >
             Apply now <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
