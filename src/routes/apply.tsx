@@ -6,6 +6,14 @@ import { toast } from "sonner";
 import emailjs from "@emailjs/browser";
 import { Toaster } from "../components/ui/sonner";
 
+// EmailJS configuration
+const EJS_SERVICE  = "service_1zvjatx";
+const EJS_TEMPLATE = "template_a4s8uhb";
+const EJS_KEY      = "ZGCBdQn6Uwqmx-pYO";
+
+// Initialize EmailJS once at module load
+emailjs.init(EJS_KEY);
+
 export const Route = createFileRoute("/apply")({
   head: () => ({
     meta: [
@@ -88,8 +96,8 @@ function ApplyPage() {
     const toastId = toast.loading("Submitting your application…");
     try {
       await emailjs.send(
-        import.meta.env.VITE_EMAILJS_SERVICE_ID,
-        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        EJS_SERVICE,
+        EJS_TEMPLATE,
         {
           full_name:         data.fullName,
           email:             data.email,
@@ -103,7 +111,7 @@ function ApplyPage() {
           employment_status: data.employmentStatus,
           annual_income:     `$${Number(data.annualIncome || 0).toLocaleString()}`,
         },
-        import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
+        EJS_KEY,
       );
       toast.dismiss(toastId);
       toast.success("Application received!");
