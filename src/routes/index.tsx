@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, ShieldCheck, Zap, BadgeDollarSign, Clock, Star, CheckCircle2 } from "lucide-react";
 import heroImg from "../assets/hero.jpg";
+import coupleLoanImg from "../assets/couple-loan.png";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -82,6 +83,17 @@ function Home() {
               <div className="text-sm text-muted-foreground mt-1">{s.l}</div>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* HIGHLIGHT IMAGE */}
+      <section className="container mx-auto px-4 pt-10">
+        <div className="max-w-5xl mx-auto rounded-3xl overflow-hidden shadow-2xl border border-border">
+          <img 
+            src={coupleLoanImg} 
+            alt="Happy couple consulting with a loan officer" 
+            className="w-full h-auto object-cover"
+          />
         </div>
       </section>
 
