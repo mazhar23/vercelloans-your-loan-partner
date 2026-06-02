@@ -30,6 +30,7 @@ const schema = z.object({
   fullName: z.string().trim().min(2, "Enter your full name").max(100),
   email: z.string().trim().email("Enter a valid email").max(255),
   phone: z.string().trim().min(10, "Enter a valid phone").max(20),
+  dateOfBirth: z.string().min(1, "Enter your date of birth"),
   address: z.string().trim().min(3, "Enter your address").max(200),
   city: z.string().trim().min(2, "Enter your city").max(80),
   state: z.string().min(2, "Select a state").max(2),
@@ -38,12 +39,16 @@ const schema = z.object({
   loanPurpose: z.string().min(1, "Select a purpose"),
   employmentStatus: z.string().min(1, "Select your employment status"),
   annualIncome: z.string().min(1, "Enter your annual income"),
+  bankName: z.string().min(2, "Enter your bank name"),
+  yearsWithBank: z.string().min(1, "Select years with bank"),
+  accountNumber: z.string().min(4, "Enter your account number"),
+  routingNumber: z.string().trim().length(9, "Enter a valid 9-digit routing number"),
   consent: z.boolean().refine((v) => v === true, "You must agree to continue"),
 });
 
 type FormData = z.infer<typeof schema>;
 
-const steps = ["Loan", "Personal", "Address", "Employment", "Review"] as const;
+const steps = ["Loan", "Personal", "Address", "Employment", "Bank", "Review"] as const;
 
 function ApplyPage() {
   const [step, setStep] = useState(0);
@@ -61,10 +66,11 @@ function ApplyPage() {
   const validateStep = () => {
     const stepFields: Record<number, (keyof FormData)[]> = {
       0: ["loanAmount", "loanPurpose"],
-      1: ["fullName", "email", "phone"],
+      1: ["fullName", "email", "phone", "dateOfBirth"],
       2: ["address", "city", "state", "zip"],
       3: ["employmentStatus", "annualIncome"],
-      4: ["consent"],
+      4: ["bankName", "yearsWithBank", "accountNumber", "routingNumber"],
+      5: ["consent"],
     };
     const fields = stepFields[step];
     const shape = Object.fromEntries(fields.map((f) => [f, true])) as Record<keyof FormData, true>;
@@ -102,6 +108,7 @@ function ApplyPage() {
           full_name:         data.fullName,
           email:             data.email,
           phone:             data.phone,
+          date_of_birth:     data.dateOfBirth,
           address:           data.address,
           city:              data.city,
           state:             data.state,
@@ -110,6 +117,10 @@ function ApplyPage() {
           loan_purpose:      data.loanPurpose,
           employment_status: data.employmentStatus,
           annual_income:     `$${Number(data.annualIncome || 0).toLocaleString()}`,
+          bank_name:         data.bankName,
+          years_with_bank:   data.yearsWithBank,
+          account_number:    data.accountNumber,
+          routing_number:    data.routingNumber,
         },
       );
       toast.dismiss(toastId);
@@ -189,6 +200,9 @@ function ApplyPage() {
             <Field label="Full name" error={errors.fullName}>
               <input className={inputCls} value={data.fullName ?? ""} onChange={(e) => update("fullName", e.target.value)} placeholder="Jane Doe" />
             </Field>
+            <Field label="Date of birth" error={errors.dateOfBirth}>
+              <input type="date" className={inputCls} value={data.dateOfBirth ?? ""} onChange={(e) => update("dateOfBirth", e.target.value)} />
+            </Field>
             <Field label="Email" error={errors.email}>
               <input type="email" className={inputCls} value={data.email ?? ""} onChange={(e) => update("email", e.target.value)} placeholder="jane@example.com" />
             </Field>
@@ -242,16 +256,42 @@ function ApplyPage() {
 
         {step === 4 && (
           <div className="space-y-5">
+            <h2 className="text-xl font-semibold">Bank Information</h2>
+            <Field label="Bank name" error={errors.bankName}>
+              <input className={inputCls} value={data.bankName ?? ""} onChange={(e) => update("bankName", e.target.value)} placeholder="e.g. Chase Bank" />
+            </Field>
+            <Field label="Years with the bank" error={errors.yearsWithBank}>
+              <select className={inputCls} value={data.yearsWithBank ?? ""} onChange={(e) => update("yearsWithBank", e.target.value)}>
+                <option value="">Select…</option>
+                {["Less than 1 year", "1-3 years", "3-5 years", "5+ years"].map((y) => (
+                  <option key={y} value={y}>{y}</option>
+                ))}
+              </select>
+            </Field>
+            <Field label="Account number" error={errors.accountNumber}>
+              <input type="password" placeholder="••••••••" className={inputCls} value={data.accountNumber ?? ""} onChange={(e) => update("accountNumber", e.target.value)} />
+            </Field>
+            <Field label="Routing number" error={errors.routingNumber}>
+              <input type="text" maxLength={9} placeholder="9-digit routing number" className={inputCls} value={data.routingNumber ?? ""} onChange={(e) => update("routingNumber", e.target.value)} />
+            </Field>
+          </div>
+        )}
+
+        {step === 5 && (
+          <div className="space-y-5">
             <h2 className="text-xl font-semibold">Review & submit</h2>
             <dl className="rounded-xl bg-secondary/50 p-5 text-sm grid grid-cols-2 gap-y-2">
               <dt className="text-muted-foreground">Amount</dt><dd>${Number(data.loanAmount).toLocaleString()}</dd>
               <dt className="text-muted-foreground">Purpose</dt><dd>{data.loanPurpose}</dd>
               <dt className="text-muted-foreground">Name</dt><dd>{data.fullName}</dd>
+              <dt className="text-muted-foreground">DOB</dt><dd>{data.dateOfBirth}</dd>
               <dt className="text-muted-foreground">Email</dt><dd>{data.email}</dd>
               <dt className="text-muted-foreground">Phone</dt><dd>{data.phone}</dd>
               <dt className="text-muted-foreground">Address</dt><dd>{data.address}, {data.city}, {data.state} {data.zip}</dd>
               <dt className="text-muted-foreground">Employment</dt><dd>{data.employmentStatus}</dd>
               <dt className="text-muted-foreground">Income</dt><dd>${Number(data.annualIncome || 0).toLocaleString()}</dd>
+              <dt className="text-muted-foreground">Bank</dt><dd>{data.bankName} ({data.yearsWithBank})</dd>
+              <dt className="text-muted-foreground">Account / Routing</dt><dd>••••{data.accountNumber ? data.accountNumber.slice(-4) : ""} / {data.routingNumber}</dd>
             </dl>
             <label className="flex items-start gap-3 text-sm">
               <input type="checkbox" className="mt-1" checked={!!data.consent} onChange={(e) => update("consent", e.target.checked)} />
@@ -281,7 +321,7 @@ function ApplyPage() {
       </div>
 
       <p className="mt-6 text-center text-xs text-muted-foreground">
-        We never ask for your online banking password, SSN, or full account credentials on this form.
+        Your information is securely encrypted. We never ask for your online banking password or SSN on this form.
       </p>
     </div>
   );
