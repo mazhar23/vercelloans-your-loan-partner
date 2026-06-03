@@ -35,14 +35,14 @@
 
 .inner-content {
   position: relative;
-  border: 1px solid var(--border);
-  background: var(--background);
+  border: 1px solid var(--star-border-outline, transparent);
+  background: var(--star-border-bg, var(--background));
   color: inherit;
   font-size: inherit;
   font-weight: inherit;
   text-align: center;
-  padding: 4px 10px;
-  border-radius: 7px;
+  padding: var(--star-border-padding, 4px 10px);
+  border-radius: inherit;
   z-index: 1;
   display: inline-flex;
   align-items: center;

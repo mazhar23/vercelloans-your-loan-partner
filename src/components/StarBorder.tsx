@@ -32,14 +32,14 @@ const StarBorder: React.FC<StarBorderProps> = ({
       <div
         className="border-gradient-bottom"
         style={{
-          background: `radial-gradient(circle, ${color}, transparent 10%)`,
+          background: `radial-gradient(circle, ${color}, transparent 50%)`,
           animationDuration: speed
         }}
       />
       <div
         className="border-gradient-top"
         style={{
-          background: `radial-gradient(circle, ${color}, transparent 10%)`,
+          background: `radial-gradient(circle, ${color}, transparent 50%)`,
           animationDuration: speed
         }}
       />

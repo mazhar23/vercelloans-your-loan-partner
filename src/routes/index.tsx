@@ -169,7 +169,7 @@ function Home() {
             clickEffect={true}
             spotlightRadius={300}
             particleCount={12}
-            glowColor="0, 190, 143"
+            glowColor="#00be8f"
           />
         </div>
       </section>

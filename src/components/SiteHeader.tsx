@@ -40,8 +40,8 @@ export function SiteHeader() {
           <StarBorder
             as="span"
             color="#00be8f"
-            speed="5s"
-            thickness={1}
+            speed="3s"
+            thickness={2}
             className="text-foreground"
             style={{
               "--star-border-bg": scrolled ? "var(--background)" : "var(--card)",

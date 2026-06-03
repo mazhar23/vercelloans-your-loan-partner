@@ -183,8 +183,6 @@ const ElectricBorder: React.FC<ElectricBorderProps> = ({
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
       canvas.width = width * dpr;
       canvas.height = height * dpr;
-      canvas.style.width = `${width}px`;
-      canvas.style.height = `${height}px`;
       ctx.scale(dpr, dpr);
 
       return { width, height };
