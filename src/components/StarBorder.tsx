@@ -11,22 +11,23 @@ interface StarBorderProps extends React.HTMLAttributes<HTMLElement> {
 }
 
 const StarBorder: React.FC<StarBorderProps> = ({
-  as: Component = "button",
+  as: Component = "span",
   className = "",
-  color = "white",
+  color = "#00be8f",
   speed = "6s",
   thickness = 1,
   children,
   ...rest
 }) => {
+  const { style, ...restWithoutStyle } = rest;
   return (
     <Component
       className={`star-border-container ${className}`}
       style={{
         padding: `${thickness}px`,
-        ...rest.style
+        ...style
       }}
-      {...rest}
+      {...restWithoutStyle}
     >
       <div
         className="border-gradient-bottom"

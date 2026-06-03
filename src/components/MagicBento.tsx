@@ -5,7 +5,7 @@ import "./MagicBento.css";
 
 const DEFAULT_PARTICLE_COUNT = 12;
 const DEFAULT_SPOTLIGHT_RADIUS = 300;
-const DEFAULT_GLOW_COLOR = "0, 190, 143"; // VercelLoans mint accent RGB
+const DEFAULT_GLOW_COLOR = "#00be8f"; // VercelLoans mint accent hex
 const MOBILE_BREAKPOINT = 768;
 
 interface BentoCardData {
@@ -62,8 +62,8 @@ const createParticleElement = (x: number, y: number, color = DEFAULT_GLOW_COLOR)
     width: 4px;
     height: 4px;
     border-radius: 50%;
-    background: rgba(${color}, 1);
-    box-shadow: 0 0 6px rgba(${color}, 0.6);
+    background: ${color};
+    box-shadow: 0 0 6px color-mix(in srgb, ${color} 60%, transparent);
     pointer-events: none;
     z-index: 100;
     left: ${x}px;
@@ -86,6 +86,8 @@ const updateCardGlowProperties = (card: HTMLElement, mouseX: number, mouseY: num
   card.style.setProperty("--glow-y", `${relativeY}%`);
   card.style.setProperty("--glow-intensity", glow.toString());
   card.style.setProperty("--glow-radius", `${radius}px`);
+  card.style.setProperty("--glow-opacity-80", `${glow * 80}%`);
+  card.style.setProperty("--glow-opacity-40", `${glow * 40}%`);
 };
 
 interface ParticleCardProps {
@@ -286,7 +288,7 @@ const ParticleCard: React.FC<ParticleCardProps> = ({
         width: ${maxDistance * 2}px;
         height: ${maxDistance * 2}px;
         border-radius: 50%;
-        background: radial-gradient(circle, rgba(${glowColor}, 0.4) 0%, rgba(${glowColor}, 0.2) 30%, transparent 70%);
+        background: radial-gradient(circle, color-mix(in srgb, ${glowColor} 40%, transparent) 0%, color-mix(in srgb, ${glowColor} 20%, transparent) 30%, transparent 70%);
         left: ${x - maxDistance}px;
         top: ${y - maxDistance}px;
         pointer-events: none;
@@ -367,11 +369,11 @@ const GlobalSpotlight: React.FC<GlobalSpotlightProps> = ({
       border-radius: 50%;
       pointer-events: none;
       background: radial-gradient(circle,
-        rgba(${glowColor}, 0.15) 0%,
-        rgba(${glowColor}, 0.08) 15%,
-        rgba(${glowColor}, 0.04) 25%,
-        rgba(${glowColor}, 0.02) 40%,
-        rgba(${glowColor}, 0.01) 65%,
+        color-mix(in srgb, ${glowColor} 15%, transparent) 0%,
+        color-mix(in srgb, ${glowColor} 8%, transparent) 15%,
+        color-mix(in srgb, ${glowColor} 4%, transparent) 25%,
+        color-mix(in srgb, ${glowColor} 2%, transparent) 40%,
+        color-mix(in srgb, ${glowColor} 1%, transparent) 65%,
         transparent 70%
       );
       z-index: 200;
@@ -483,7 +485,7 @@ interface BentoCardGridProps {
 }
 
 const BentoCardGrid: React.FC<BentoCardGridProps> = ({ children, gridRef }) => (
-  <div className="card-grid bento-section" ref={gridRef}>
+  <div className="magic-bento-grid bento-section" ref={gridRef}>
     {children}
   </div>
 );
@@ -663,7 +665,7 @@ const MagicBento: React.FC<MagicBentoProps> = ({
                     width: ${maxDistance * 2}px;
                     height: ${maxDistance * 2}px;
                     border-radius: 50%;
-                    background: radial-gradient(circle, rgba(${glowColor}, 0.4) 0%, rgba(${glowColor}, 0.2) 30%, transparent 70%);
+                    background: radial-gradient(circle, color-mix(in srgb, ${glowColor} 40%, transparent) 0%, color-mix(in srgb, ${glowColor} 20%, transparent) 30%, transparent 70%);
                     left: ${x - maxDistance}px;
                     top: ${y - maxDistance}px;
                     pointer-events: none;

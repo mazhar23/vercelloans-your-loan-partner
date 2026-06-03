@@ -1,4 +1,4 @@
-.card-grid {
+.magic-bento-grid {
   display: grid;
   gap: 1.25rem;
   padding: 1.5rem 0;
@@ -32,7 +32,7 @@
 
 .magic-bento-card:hover {
   transform: translateY(-2px);
-  border-color: rgba(var(--glow-color), 0.4);
+  border-color: color-mix(in srgb, var(--glow-color) 40%, transparent);
   box-shadow: 0 10px 30px -10px color-mix(in oklab, oklch(0.72 0.17 160) 25%, transparent);
 }
 
@@ -99,7 +99,7 @@
 }
 
 @media (max-width: 599px) {
-  .card-grid {
+  .magic-bento-grid {
     grid-template-columns: 1fr;
     width: 100%;
     padding: 0.5em;
@@ -113,13 +113,13 @@
 }
 
 @media (min-width: 600px) {
-  .card-grid {
+  .magic-bento-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (min-width: 1024px) {
-  .card-grid {
+  .magic-bento-grid {
     grid-template-columns: repeat(4, 1fr);
   }
 
@@ -149,8 +149,8 @@
   padding: 1px;
   background: radial-gradient(
     var(--glow-radius) circle at var(--glow-x) var(--glow-y),
-    rgba(var(--glow-color), calc(var(--glow-intensity) * 0.8)) 0%,
-    rgba(var(--glow-color), calc(var(--glow-intensity) * 0.4)) 30%,
+    color-mix(in srgb, var(--glow-color) var(--glow-opacity-80, 0%), transparent) 0%,
+    color-mix(in srgb, var(--glow-color) var(--glow-opacity-40, 0%), transparent) 30%,
     transparent 60%
   );
   border-radius: inherit;
@@ -184,7 +184,7 @@
   left: -2px;
   right: -2px;
   bottom: -2px;
-  background: rgba(var(--glow-color), 0.1);
+  background: color-mix(in srgb, var(--glow-color) 10%, transparent);
   border-radius: 50%;
   z-index: -1;
 }

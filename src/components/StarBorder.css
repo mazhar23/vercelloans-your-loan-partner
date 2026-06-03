@@ -3,23 +3,26 @@
   position: relative;
   border-radius: 8px;
   overflow: hidden;
+  /* Ensure the animated gradients show through */
+  background: transparent;
 }
 
 .border-gradient-bottom {
   position: absolute;
   width: 300%;
   height: 50%;
-  opacity: 0.8;
+  opacity: 0.85;
   bottom: -12px;
   right: -250%;
   border-radius: 50%;
   animation: star-movement-bottom linear infinite alternate;
   z-index: 0;
+  pointer-events: none;
 }
 
 .border-gradient-top {
   position: absolute;
-  opacity: 0.8;
+  opacity: 0.85;
   width: 300%;
   height: 50%;
   top: -12px;
@@ -27,19 +30,23 @@
   border-radius: 50%;
   animation: star-movement-top linear infinite alternate;
   z-index: 0;
+  pointer-events: none;
 }
 
 .inner-content {
   position: relative;
-  border: 1px solid var(--star-border-outline, var(--border));
-  background: var(--star-border-bg, var(--background));
+  border: 1px solid var(--border);
+  background: var(--background);
   color: inherit;
   font-size: inherit;
+  font-weight: inherit;
   text-align: center;
-  padding: var(--star-border-padding, 4px 10px);
-  border-radius: calc(inherit - 1px);
+  padding: 4px 10px;
+  border-radius: 7px;
   z-index: 1;
-  display: block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 @keyframes star-movement-bottom {

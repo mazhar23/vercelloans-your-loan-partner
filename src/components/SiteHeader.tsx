@@ -39,7 +39,7 @@ export function SiteHeader() {
           </span>
           <StarBorder
             as="span"
-            color="var(--accent)"
+            color="#00be8f"
             speed="5s"
             thickness={1}
             className="text-foreground"
