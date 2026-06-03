@@ -5,6 +5,7 @@ import heroImg from "../assets/hero.jpg";
 import coupleLoanImg from "../assets/couple-loan.png";
 import ElectricBorder from "../components/ElectricBorder";
 import MagicBento from "../components/MagicBento";
+import TextType from "../components/TextType";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -75,7 +76,19 @@ function Home() {
             >
               Personal loans,{" "}
               <span style={{ background: "var(--gradient-hero)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
-                delivered fast.
+                <TextType
+                  as="span"
+                  text={["delivered fast.", "made simple.", "built on trust.", "designed for you."]}
+                  typingSpeed={70}
+                  deletingSpeed={40}
+                  pauseDuration={2000}
+                  showCursor={true}
+                  cursorCharacter="|"
+                  cursorClassName="text-type-hero-cursor"
+                  loop={true}
+                  startOnVisible={true}
+                  variableSpeed={{ min: 40, max: 100 }}
+                />
               </span>
             </h1>
             <p
