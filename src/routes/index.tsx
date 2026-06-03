@@ -7,6 +7,19 @@ import ElectricBorder from "../components/ElectricBorder";
 import MagicBento from "../components/MagicBento";
 import TextType from "../components/TextType";
 
+import androidAppImg from "../assets/android-app-on-google-play-logo.png";
+import iosAppImg from "../assets/download-on-the-app-store-badge-svg-pdf-ai-eps.jpg";
+import appMockupImg from "../assets/Gemini_Generated_Image_dz7zvxdz7zvxdz7z (1).png";
+import untitledImg from "../assets/Untitled.png";
+
+const awardsData = [
+  { source: "Alternate Finance", title: "Top Alternate Finance Companies", subtitle: "Industry Leader", score: "" },
+  { source: "Bankrate", title: "Excellent", subtitle: "Bankrate Score", score: "4.5" },
+  { source: "Money", title: "Top Picks 2026", subtitle: "Personal Loan Companies", score: "" },
+];
+// Duplicate for seamless infinite scrolling
+const tickerItems = [...awardsData, ...awardsData, ...awardsData, ...awardsData];
+
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
@@ -137,6 +150,28 @@ function Home() {
         </div>
       </section>
 
+      {/* AWARDS TICKER */}
+      <div className="ticker-strip py-4">
+        <div className="ticker-track">
+          {tickerItems.map((item, i) => (
+            <div key={i} className="ticker-item">
+              <div>
+                <div className="ticker-item__badge">{item.source}</div>
+                <div className="ticker-item__title">{item.title}</div>
+                <div className="ticker-item__subtitle">{item.subtitle}</div>
+              </div>
+              {item.score && (
+                <div className="ticker-item__score">
+                  <Star className="h-4 w-4 fill-current text-accent" />
+                  {item.score}
+                </div>
+              )}
+              {i < tickerItems.length - 1 && <div className="ticker-item__divider mx-4" />}
+            </div>
+          ))}
+        </div>
+      </div>
+
       {/* STATS */}
       <section className="border-y border-border bg-card">
         <div ref={statsRef} className="container mx-auto px-4 py-10 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
@@ -244,6 +279,37 @@ function Home() {
               <div className="text-xs text-muted-foreground">{t.l}</div>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* APP DOWNLOAD */}
+      <section className="app-download-section border-t border-border bg-background py-20">
+        <div className="container mx-auto px-4 grid lg:grid-cols-2 gap-12 items-center">
+          <div className="order-2 lg:order-1 relative flex justify-center">
+            <div className="absolute inset-0 -z-10 rounded-3xl animate-breathe" style={{ background: "var(--gradient-hero)", filter: "blur(60px)", opacity: 0.15 }} />
+            <img src={appMockupImg} alt="VercelLoans App" className="w-full max-w-sm h-auto rounded-3xl shadow-2xl object-cover" />
+          </div>
+          <div className="order-1 lg:order-2">
+            <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-6">Do it all in the VercelLoans App</h2>
+            <p className="text-lg text-muted-foreground mb-8 max-w-xl">
+              Manage your loan, check your rate, make payments, and monitor your credit score—all from the palm of your hand. Download the app today.
+            </p>
+            <div className="flex flex-wrap gap-4 items-center">
+              <a href="#" className="inline-block app-badge">
+                <img src={iosAppImg} alt="Download on the App Store" className="h-12 w-auto rounded-lg object-contain" />
+              </a>
+              <a href="#" className="inline-block app-badge">
+                <img src={androidAppImg} alt="Get it on Google Play" className="h-12 w-auto rounded-lg object-contain bg-black px-2" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FOOTER IMAGE BANNER */}
+      <section className="bg-background pb-12 pt-0">
+        <div className="container mx-auto px-4">
+           <img src={untitledImg} alt="Additional resources" className="w-full h-auto rounded-2xl shadow-xl border border-border" />
         </div>
       </section>
 

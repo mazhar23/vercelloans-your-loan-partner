@@ -226,3 +226,111 @@
   transform: translateY(0);
 }
 
+/* ── Awards Ticker Strip ────────────────────────────────────────────── */
+@keyframes ticker-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.ticker-strip {
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+  background: var(--card);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.ticker-strip::before,
+.ticker-strip::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 80px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.ticker-strip::before {
+  left: 0;
+  background: linear-gradient(to right, var(--card), transparent);
+}
+
+.ticker-strip::after {
+  right: 0;
+  background: linear-gradient(to left, var(--card), transparent);
+}
+
+.ticker-track {
+  display: inline-flex;
+  animation: ticker-scroll 30s linear infinite;
+  will-change: transform;
+}
+
+.ticker-track:hover {
+  animation-play-state: paused;
+}
+
+.ticker-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 2.5rem;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.ticker-item__divider {
+  width: 1px;
+  height: 28px;
+  background: var(--border);
+  flex-shrink: 0;
+}
+
+.ticker-item__badge {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted-foreground);
+}
+
+.ticker-item__title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--foreground);
+}
+
+.ticker-item__subtitle {
+  font-size: 13px;
+  color: var(--muted-foreground);
+}
+
+.ticker-item__score {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+/* ── App Download Section ───────────────────────────────────────────── */
+.app-download-section {
+  position: relative;
+  overflow: hidden;
+}
+
+.app-badge {
+  height: 48px;
+  width: auto;
+  border-radius: 8px;
+  transition: transform 200ms ease, opacity 200ms ease;
+}
+
+.app-badge:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
+}
+
