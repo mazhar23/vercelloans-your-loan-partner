@@ -38,16 +38,29 @@
               return Object.keys(mem).length;
             },
           });
-          try {
-            Object.defineProperty(window, "localStorage", {
-              value: shim,
-              configurable: true,
-            });
-            Object.defineProperty(window, "sessionStorage", {
-              value: shim,
-              configurable: true,
-            });
-          } catch (e2) {}
+          var install = function (prop) {
+            var ok = false;
+            try {
+              Object.defineProperty(window, prop, { value: shim, configurable: true });
+              ok = true;
+            } catch (e2) {}
+            if (!ok) {
+              try {
+                Object.defineProperty(Object.getPrototypeOf(window), prop, {
+                  value: shim,
+                  configurable: true,
+                });
+                ok = true;
+              } catch (e3) {}
+            }
+            if (!ok) {
+              try {
+                window[prop] = shim;
+              } catch (e4) {}
+            }
+          };
+          install("localStorage");
+          install("sessionStorage");
         }
       })();
     </script>
