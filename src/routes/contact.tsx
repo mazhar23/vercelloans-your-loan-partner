@@ -88,7 +88,7 @@ function ContactPage() {
             <h2 className="text-2xl font-bold">Contact details</h2>
             <div className="grid gap-4">
               {[
-                { icon: Phone, title: "Phone support", detail: "1-312-373-0471", sub: "Call us directly — no bots." },
+                { icon: Phone, title: "Phone support", detail: "1-312-373-0294", sub: "Call us directly — no bots." },
                 { icon: Mail, title: "Email", detail: "support@vercelloans.com", sub: "We respond within 1 business day." },
                 { icon: MapPin, title: "Headquarters", detail: "Downtown Chicago, Illinois", sub: "USA" },
               ].map(({ icon: Icon, title, detail, sub }) => (
