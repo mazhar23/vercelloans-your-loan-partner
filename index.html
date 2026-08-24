@@ -7,6 +7,50 @@
     <meta name="description" content="Apply online for fast, transparent personal loans up to $35,000. Quick decisions, fixed rates, funds delivered to your bank." />
     <!-- Suppress favicon -->
     <link rel="icon" href="data:," />
+    <script>
+      (function () {
+        try {
+          var t = "__ls_probe__";
+          window.localStorage.setItem(t, t);
+          window.localStorage.removeItem(t);
+        } catch (e) {
+          var mem = {};
+          var shim = {
+            getItem: function (k) {
+              return Object.prototype.hasOwnProperty.call(mem, k) ? mem[k] : null;
+            },
+            setItem: function (k, v) {
+              mem[k] = String(v);
+            },
+            removeItem: function (k) {
+              delete mem[k];
+            },
+            clear: function () {
+              mem = {};
+            },
+            key: function (i) {
+              var keys = Object.keys(mem);
+              return i < keys.length ? keys[i] : null;
+            },
+          };
+          Object.defineProperty(shim, "length", {
+            get: function () {
+              return Object.keys(mem).length;
+            },
+          });
+          try {
+            Object.defineProperty(window, "localStorage", {
+              value: shim,
+              configurable: true,
+            });
+            Object.defineProperty(window, "sessionStorage", {
+              value: shim,
+              configurable: true,
+            });
+          } catch (e2) {}
+        }
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>
